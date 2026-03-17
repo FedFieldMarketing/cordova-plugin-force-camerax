@@ -1,0 +1,17 @@
+// This file is injected by Cordova into the app's build.gradle
+// and executed at build time by MABS
+
+cdvPluginPostBuildExtras << {
+
+    def forcedCameraXVersion = '1.4.2'
+
+    println "[ForceCameraX] Forcing CameraX version to ${forcedCameraXVersion}"
+
+    configurations.all { cfg ->
+        resolutionStrategy.force(
+            "androidx.camera:camera-core:${forcedCameraXVersion}",
+            "androidx.camera:camera-camera2:${forcedCameraXVersion}",
+            "androidx.camera:camera-lifecycle:${forcedCameraXVersion}"
+        )
+    }
+}
