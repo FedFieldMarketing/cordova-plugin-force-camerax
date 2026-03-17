@@ -1,0 +1,9 @@
+{
+  "name": "cordova-plugin-force-camerax",
+  "version": "1.0.0",
+  "description": "Forces CameraX version to support Android 16KB page size",
+  "cordova": {
+    "id": "com.fedfield.forcecamerax",
+    "platforms": ["android"]
+  }
+}
