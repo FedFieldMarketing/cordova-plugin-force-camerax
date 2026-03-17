@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="com.fedins.forcecamerax"
+    id="com.fedfield.forcecamerax"
     version="1.0.0">
 
     <name>ForceCameraXVersion</name>
 
-    <description>
-        Forces CameraX dependencies to a compatible version to support
-        Android 16KB page size devices.
-    </description>
-
-    <license>MIT</license>
-
     <platform name="android">
-        src/android/build-extras.gradle
+        <framework
+            src="src/android/build-extras.gradle"
+            custom="true"
+            type="gradleReference" />
     </platform>
 
 </plugin>
