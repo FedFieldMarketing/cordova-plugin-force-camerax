@@ -1,15 +1,21 @@
 // This file is injected by Cordova into the app's build.gradle
-// Forces CameraX to a 16KB page-aligned version for Android compatibility
+// Forces CameraX and TensorFlow Lite to 16KB page-aligned versions for Android compatibility
 
 def forcedCameraXVersion = '1.4.2'
+def forcedTFLiteVersion = '2.16.1'
 
-println "[ForceCameraX] Forcing CameraX version to ${forcedCameraXVersion}"
+println "[ForceLibVersions] Forcing CameraX to ${forcedCameraXVersion}, TensorFlow Lite to ${forcedTFLiteVersion}"
 
 // Apply resolution strategy during configuration phase (before dependency resolution)
 configurations.all { cfg ->
     resolutionStrategy.force(
         "androidx.camera:camera-core:${forcedCameraXVersion}",
         "androidx.camera:camera-camera2:${forcedCameraXVersion}",
-        "androidx.camera:camera-lifecycle:${forcedCameraXVersion}"
+        "androidx.camera:camera-lifecycle:${forcedCameraXVersion}",
+        "org.tensorflow:tensorflow-lite:${forcedTFLiteVersion}",
+        "org.tensorflow:tensorflow-lite-api:${forcedTFLiteVersion}",
+        "org.tensorflow:tensorflow-lite-support:${forcedTFLiteVersion}",
+        "org.tensorflow:tensorflow-lite-task-vision:${forcedTFLiteVersion}",
+        "org.tensorflow:tensorflow-lite-task-text:${forcedTFLiteVersion}"
     )
 }
