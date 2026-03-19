@@ -1,10 +1,13 @@
 // This file is injected by Cordova into the app's build.gradle
-// Forces CameraX and TensorFlow Lite to 16KB page-aligned versions for Android compatibility
+// Forces CameraX and LiteRT (TensorFlow Lite) to 16KB page-aligned versions for Android compatibility
 
 def forcedCameraXVersion = '1.4.2'
-def forcedTFLiteVersion = '2.16.1'
+// LiteRT is Google's rebranded TensorFlow Lite. Genius Scan 5.8.0 pulls in litert:1.0.1, whose
+// libtensorflowlite_jni.so has 4KB LOAD alignment on armeabi-v7a/x86/x86_64. Version 1.4.2
+// ships all four ABIs with 16KB-aligned LOAD segments.
+def forcedLiteRTVersion = '1.4.2'
 
-println "[ForceLibVersions] Forcing CameraX to ${forcedCameraXVersion}, TensorFlow Lite to ${forcedTFLiteVersion}"
+println "[ForceLibVersions] Forcing CameraX to ${forcedCameraXVersion}, LiteRT to ${forcedLiteRTVersion}"
 
 // Apply resolution strategy during configuration phase (before dependency resolution)
 configurations.all { cfg ->
@@ -12,10 +15,7 @@ configurations.all { cfg ->
         "androidx.camera:camera-core:${forcedCameraXVersion}",
         "androidx.camera:camera-camera2:${forcedCameraXVersion}",
         "androidx.camera:camera-lifecycle:${forcedCameraXVersion}",
-        "org.tensorflow:tensorflow-lite:${forcedTFLiteVersion}",
-        "org.tensorflow:tensorflow-lite-api:${forcedTFLiteVersion}",
-        "org.tensorflow:tensorflow-lite-support:${forcedTFLiteVersion}",
-        "org.tensorflow:tensorflow-lite-task-vision:${forcedTFLiteVersion}",
-        "org.tensorflow:tensorflow-lite-task-text:${forcedTFLiteVersion}"
+        "com.google.ai.edge.litert:litert:${forcedLiteRTVersion}",
+        "com.google.ai.edge.litert:litert-api:${forcedLiteRTVersion}"
     )
 }

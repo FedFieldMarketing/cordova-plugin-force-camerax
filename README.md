@@ -1,6 +1,6 @@
 # cordova-plugin-force-camerax
 
-A Cordova plugin that forces CameraX and TensorFlow Lite dependencies to specific versions with 16KB page alignment support, required for Android 15+ compatibility.
+A Cordova plugin that forces CameraX and LiteRT (TensorFlow Lite) dependencies to specific versions with 16KB page alignment support, required for Android 15+ compatibility.
 
 ## Why
 
@@ -15,16 +15,11 @@ Injects a Gradle resolution strategy that forces these artifacts to 16KB-compati
 - `androidx.camera:camera-camera2`
 - `androidx.camera:camera-lifecycle`
 
-**TensorFlow Lite** (forced to `2.16.1`):
-- `org.tensorflow:tensorflow-lite`
-- `org.tensorflow:tensorflow-lite-api`
-- `org.tensorflow:tensorflow-lite-support`
-- `org.tensorflow:tensorflow-lite-task-vision`
-- `org.tensorflow:tensorflow-lite-task-text`
+**LiteRT** (forced to `1.4.2`):
+- `com.google.ai.edge.litert:litert`
+- `com.google.ai.edge.litert:litert-api`
 
-The TensorFlow Lite entries address the `libtensorflowlite_ini.so` (JNI init library) 4KB alignment issue that surfaces when a plugin or SDK (e.g. Genius Scan) pulls in an older TF Lite version as a transitive Maven dependency.
-
-> **Note:** This resolution strategy only works when TF Lite arrives as a transitive Maven dependency. If a third-party SDK bundles `libtensorflowlite_ini.so` directly inside its AAR, only an updated release of that SDK will fix the alignment.
+LiteRT is Google's rebranded TensorFlow Lite. Genius Scan SDK 5.8.0 declares a dependency on `litert:1.0.1`, whose `libtensorflowlite_jni.so` has 4KB LOAD segment alignment on `armeabi-v7a`, `x86`, and `x86_64`. Forcing to `1.4.2` brings all four ABIs into compliance.
 
 ## Platform support
 
